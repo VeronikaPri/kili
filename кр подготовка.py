@@ -19,16 +19,27 @@ def main():
     
     filename ="C:\\Users\\student\\Desktop\\textik.txt"
     DASH = "—"
+    list_of_authors = []
     with open(filename, encoding="utf8") as fid:
         for line in fid:
+            line = line.strip()
             parts = line.split(DASH)
-            quote = parts[0]
-            author = parts[1]
+            quote = parts[0].strip()
+            author = parts[1].strip()
 
             quote_words = get_words(quote)
+        
 
-            if len(quote_words) < 10:
-                print(quote)
+            if "разум" in quote_words:
+                list_of_authors.append(author)
+                
+    print("Слово 'разум' содержится в ",
+          len(list_of_authors),
+          " цитате(ах)")
+    print(", ".join(list_of_authors))
 
 if __name__ == "__main__":
     main()
+
+
+
