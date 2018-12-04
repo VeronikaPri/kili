@@ -1,11 +1,11 @@
 #Подготовка к к.р.
 text = "«наивный» - <есть> натуральный, природный, не обработанный искусственными условностями цивилизации. Так что если наша культура есть продолжение природы, её язык (по распространенному мнению философов), её заявление о себе, то в наивном человеке и его слове - это прямейше, спонтанно, без опосредованных звеньев...  — Георгий Гачев, «Плюсы и минусы наивного философствования»"
 def clear_text(text, trash_tokens):
-#left side clearing 
     text = text.rstrip(trash_tokens)
+    text = text.lstrip(trash_tokens)
     return text
 def get_words(text):
-    trash_tokens = ",.//—-?!()*&^%$#@+=_<>[]«»"
+    trash_tokens = '!"#$%&\'-()*+,./:;<=>?@[\\]^_`{|}~«»—'
     tokens = text.split()
     good_tokens = []
     for token in tokens:
@@ -17,7 +17,7 @@ def get_words(text):
 
 def main():
     
-    filename ="C:\\Users\\student\\Desktop\\textik.txt"
+    filename ="textik.txt"
     DASH = "—"
     list_of_authors = []
     with open(filename, encoding="utf8") as fid:
