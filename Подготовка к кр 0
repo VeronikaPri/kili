@@ -1,2 +1,52 @@
 Полезные штуки:
+
+if __name__ == "__main__":
+    main()
+
 str.lstrip([chars]) \ str.rstrip([chars]) - возвращает указанную строку без указанных символов слева\справа
+
+text = "«наивный» - <есть> натуральный, природный, не обработанный искусственными условностями цивилизации. Так что если наша культура есть продолжение природы, её язык (по распространенному мнению философов), её заявление о себе, то в наивном человеке и его слове - это прямейше, спонтанно, без опосредованных звеньев...  — Георгий Гачев, «Плюсы и минусы наивного философствования»"
+
+#удаляет символы с конца и с начала текста
+
+def clear_text(text, trash_tokens):
+    text = text.rstrip(trash_tokens)
+    text = text.lstrip(trash_tokens)
+    return text
+    
+#разделяет текст на список из слов без символов
+
+def get_words(text):
+    trash_tokens = '!"#$%&\'-()*+,./:;<=>?@[\\]^_`{|}~«»—'
+    tokens = text.split()
+    good_tokens = []
+    for token in tokens:
+        clean_token = clear_text(token, trash_tokens)
+        if clean_token != "":
+            clean_token = clean_token.lower()
+            good_tokens.append(clean_token)
+    return good_tokens
+    
+#выписывает текст от начала до тире, вместо тире запятая и до конца.
+    
+def split_quote(quote):
+    
+    DASH = '—'
+    dash_index = quote.rfind(DASH)
+    
+    left = quote[:dash_index].strip()
+    right = quote[dash_index + 1:].strip()
+    
+    return [left, right]
+    
+    # выводит цитаты
+    
+with open(FILENAME, encoding='utf-8') as fid:
+    for line in fid:
+        quote, author = split_quote(line)
+        quote_words = get_words(quote)
+        author_words = get_words(author)
+        
+    if len(quote_words) < 10:
+        print(quote)
+    
